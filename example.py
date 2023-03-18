@@ -24,7 +24,7 @@ def inference(args):
     (audio, _) = load_audio(audio_path, sr=sample_rate, mono=True)
 
     # Transcriptor
-    transcriptor = PianoTranscription(device=device, checkpoint_path=None)
+    transcriptor = PianoTranscription(device=device, checkpoint_path=args.checkpoint_path)
     """device: 'cuda' | 'cpu'
     checkpoint_path: None for default path, or str for downloaded checkpoint path.
     """
@@ -40,6 +40,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--audio_path', type=str, required=True)
     parser.add_argument('--output_midi_path', type=str, required=True)
+    parser.add_argument('--checkpoint_path', type=str, required=True)
     parser.add_argument('--cuda', action='store_true', default=False)
 
     args = parser.parse_args()
